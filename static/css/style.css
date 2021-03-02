@@ -9,3 +9,20 @@ h1, h4 {
 .navbar-brand {
     text-align: right;
 }
+
+h4 {
+    color: grey;
+}
+
+img {
+    margin-top: 16px;
+}
+
+.ship {
+    max-width: 512px;
+    margin: auto;
+}
+
+.tran {
+    text-align: center;
+}
