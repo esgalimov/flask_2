@@ -1,10 +1,23 @@
 from flask import Flask
 from flask import render_template
 from flask import url_for
+from flask import redirect
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
+
+
+class LoginForm(FlaskForm):
+    id_astronaut = StringField('Id астронавта', validators=[DataRequired()])
+    password_astronaut = PasswordField('Пароль астронавта', validators=[DataRequired()])
+    id_capitan = StringField('Id капитана', validators=[DataRequired()])
+    password_capitan = PasswordField('Пароль астронавта', validators=[DataRequired()])
+
+    submit = SubmitField('Доступ')
 
 
 app = Flask(__name__)
-# css = url_for('static', filename='css/style.css')
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 @app.route('/')
@@ -39,6 +52,19 @@ def answer():
                    'sex': 'male', 'motivation': 'Всегда мечтал застрять на марсе',
                    'ready': 'True'}
     return render_template('auto_answer.html', title=person_info['title'], person_info=person_info)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect('/success')
+    return render_template('login.html', title='Авторизация', form=form)
+
+
+@app.route('/success')
+def success():
+    return 'success'
 
 
 if __name__ == '__main__':

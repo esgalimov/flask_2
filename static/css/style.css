@@ -12,7 +12,6 @@ h1, h4 {
 
 h4 {
     color: grey;
-    padding-left: 20px;
 }
 
 img {
@@ -30,4 +29,22 @@ img {
 
 .info_list {
     padding-left: 40px;
+}
+
+.auto-answer-h4 {
+    padding-left: 20px;
+}
+
+.accident {
+    min-height: 50px;
+    background-image: url(/static/img/MARS.png);
+    background-repeat: no-repeat;
+    margin-bottom: 16px;
+    margin-left: 20px;
+}
+
+.accident-text {
+    max-width: 400px;
+    margin-left: 150px;
+    padding-top: 5px;
 }
