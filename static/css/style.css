@@ -48,3 +48,12 @@ img {
     margin-left: 150px;
     padding-top: 5px;
 }
+
+.distribution {
+    max-width: 500px;
+    margin: auto;
+}
+
+.distribution-title {
+    text-align: center;
+}

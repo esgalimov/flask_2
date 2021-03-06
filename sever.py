@@ -67,5 +67,12 @@ def success():
     return 'success'
 
 
+@app.route('/distribution')
+def distribution():
+    crew = ['Ридли Скотт', 'Энди Уир', 'Марк Уотни', 'Венката Капур',
+            'Тедди Сандерс', 'Шон Бин', 'Иванов Пётр', 'Петров Иван']
+    return render_template('distribution.html', title='Распределение', crew=crew)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
