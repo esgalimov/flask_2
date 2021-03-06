@@ -12,6 +12,7 @@ h1, h4 {
 
 h4 {
     color: grey;
+    padding-left: 20px;
 }
 
 img {
@@ -25,4 +26,8 @@ img {
 
 .tran {
     text-align: center;
+}
+
+.info_list {
+    padding-left: 40px;
 }

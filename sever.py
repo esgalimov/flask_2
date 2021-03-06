@@ -29,5 +29,17 @@ def prof_list(list):
     return render_template('prof_list.html', title='Заготовка', list=list, prof_lis=prof_lis)
 
 
+@app.route('/answer')
+@app.route('/auto_answer')
+def answer():
+    person_info = {'title': 'Анкета',
+                   'surname': 'Watny',
+                   'name': 'Mark', 'education': 'выше среднего',
+                   'profession': 'штурман марсохода',
+                   'sex': 'male', 'motivation': 'Всегда мечтал застрять на марсе',
+                   'ready': 'True'}
+    return render_template('auto_answer.html', title=person_info['title'], person_info=person_info)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
