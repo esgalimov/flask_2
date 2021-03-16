@@ -21,9 +21,13 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 @app.route('/')
-@app.route('/index')
-def index():
-    return render_template('index.html', title='Заготовка')
+def ind():
+    return render_template('index.html', title='Mars one')
+
+
+@app.route('/index/<title>')
+def index(title):
+    return render_template('index.html', title=title)
 
 
 @app.route('/training/<prof>')
