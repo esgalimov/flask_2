@@ -1,10 +1,11 @@
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
 from flask import url_for
 from flask import redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
+import os
 
 
 class LoginForm(FlaskForm):
@@ -81,6 +82,11 @@ def distribution():
 @app.route('/table/<sex>/<int:age>')
 def table(sex, age):
     return render_template('room.html', title='Офрмление каюты', sex=sex, age=age)
+
+
+@app.route('/carousel', methods=['POST', 'GET'])
+def carousel():
+    return render_template('carousel.html', title='Пейзажи марса')
 
 
 if __name__ == '__main__':
