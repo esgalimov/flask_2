@@ -6,6 +6,15 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 import os
+from werkzeug.utils import secure_filename
+
+
+UPLOAD_FOLDER = './static/imgs_for_galery'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 class LoginForm(FlaskForm):
@@ -15,10 +24,6 @@ class LoginForm(FlaskForm):
     password_capitan = PasswordField('Пароль астронавта', validators=[DataRequired()])
 
     submit = SubmitField('Доступ')
-
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
 @app.route('/')
@@ -87,6 +92,25 @@ def table(sex, age):
 @app.route('/carousel', methods=['POST', 'GET'])
 def carousel():
     return render_template('carousel.html', title='Пейзажи марса')
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+@app.route('/galery', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect('/galery')
+    photos = os.listdir(UPLOAD_FOLDER)
+    for i in range(len(photos)):
+        photos[i] = url_for('static', filename=f'imgs_for_galery/{photos[i]}')
+    return render_template('galery.html', title='Галерея', photos=photos)
 
 
 if __name__ == '__main__':
