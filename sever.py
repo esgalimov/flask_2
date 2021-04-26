@@ -115,6 +115,21 @@ def upload_file():
     return render_template('galery.html', title='Галерея', photos=photos)
 
 
+@app.route('/load_photo', methods=['GET', 'POST'])
+def load_photo():
+    active_filename = ''
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            active_filename = filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect('/load_photo')
+
+    return render_template('load_photo.html', title='Загрузка фото',
+                           photo=url_for('static', filename=f'img/{active_filename}', active_filename=active_filename))
+
+
 @app.route('/member')
 def member():
     with open('./templates/crewmates.json', 'r') as file:
