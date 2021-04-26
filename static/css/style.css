@@ -116,10 +116,29 @@ img {
 }
 
 .add-photo {
+    max-width: 1080px;
     margin: auto;
 }
 
 .member-photo {
     max-width: 720px;
     margin: auto;
+}
+
+form.add-photo-form {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1080px;
+    background-color: #ffcc00;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.member-photo {
+    margin: 10px;
+}
+
+.add-photo-but {
+    margin: 10px;
 }

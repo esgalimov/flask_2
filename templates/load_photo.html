@@ -8,13 +8,16 @@
     <h4>И на Марсе будут яблони цвести!</h4>
 
 <div class="form-group add-photo">
-  <label for="photo">Приложите фотографию</label>
-  <form action="" method="post" enctype="multipart/form-data">
+
+  <form action="" method="post" enctype="multipart/form-data" class="add-photo-form">
+       <label for="photo">Приложите фотографию</label>
   <input type="file" class="form-control-file" id="photo" name="file">
+      <br>
       {% if active_filename != '' %}
-      <img class="member-photo" src="{{photo}}" alt="Картинка члена экипажа">
+      <img class="member-photo" src="{{photo}}" alt="Картинка">
       {% endif %}
-    <button type="submit" class="btn btn-primary">Отправить</button>
+      <br>
+    <button type="submit" class="btn btn-primary add-photo-but">Отправить</button>
    </form>
 </div>
 {% endblock %}

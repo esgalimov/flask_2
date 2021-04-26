@@ -11,12 +11,14 @@ from random import choice
 import json
 
 
-UPLOAD_FOLDER = './static/imgs_for_galery'
+UPLOAD_FOLDER = './static/img'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+active_filename = ''
 
 
 class LoginForm(FlaskForm):
@@ -117,17 +119,18 @@ def upload_file():
 
 @app.route('/load_photo', methods=['GET', 'POST'])
 def load_photo():
-    active_filename = ''
+
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
+            global active_filename
             filename = secure_filename(file.filename)
             active_filename = filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect('/load_photo')
 
     return render_template('load_photo.html', title='Загрузка фото',
-                           photo=url_for('static', filename=f'img/{active_filename}', active_filename=active_filename))
+                           photo=url_for('static', filename=f'img/{active_filename}'), active_filename=active_filename)
 
 
 @app.route('/member')
